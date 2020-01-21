@@ -1,13 +1,12 @@
 Source: wajig
-Maintainer: Graham Williams <Graham.Williams@togaware.com>
-Uploaders: Tshepang Lekhonkhobe <tshepang@gmail.com>
+Maintainer: Timon Engelke <debian@timonengelke.de>
 Section: admin
 Priority: optional
 Build-Depends: debhelper (>= 9), dh-python, python3, python3-apt, bash-completion
-X-Python3-Version: >= 3.3
+X-Python3-Version: >= 3.5
 Standards-Version: 3.9.8
-Vcs-Browser: https://bitbucket.org/tshepang/wajig/src
-Vcs-Hg: https://bitbucket.org/tshepang/wajig
+Vcs-Browser: https://github.com/timonegk/wajig
+Vcs-Git: https://github.com/timonegk/wajig.git
 Homepage: http://wajig.togaware.com
 
 Package: wajig
