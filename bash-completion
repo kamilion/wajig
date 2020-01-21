@@ -27,6 +27,20 @@ _comp_dpkg_hold_packages()
 }
 }
 
+_comp_dpkg_auto_packages()
+{
+    command grep -B 2 'Auto-Installed: 1' /var/lib/apt/extended_states | \
+        command grep "Package: $1" | cut -d\  -f2
+}
+
+_comp_dpkg_manual_packages()
+{
+    # Grepping for Auto-Installed: 0 does not work since only auto-installed
+    # packages are listed (see man 8 apt-mark).
+    command comm -23 <(_comp_dpkg_installed_packages | sort) \
+        <(_comp_dpkg_auto_packages | sort)
+}
+
 _have wajig &&
 _wajig()
 {
@@ -50,7 +64,7 @@ list-status|madison|move|new|new-detail|news|new-upgrades|nonfree|\
 orphans|policy|purge|purge-orphans|purge-removed|rbuilddeps|readme|\
 rec-download|recommended|reconfigure|reinstall|reload|remove|\
 remove-orphans|repackage|reportbug|restart|rpm2deb|rpminstall|\
-search|searchapt|show|sizes|snapshot|source|start|status|status-match|\
+search|searchapt|set-auto|set-manual|show|sizes|snapshot|source|start|status|status-match|\
 stop|tasksel|todo|toupgrade|tutorial|unhold|unofficial|\
 update|update-alternatives|update-pci-ids|update-usb-ids|upgrade|\
 upgrade-security|verify|versions|which-package) ]];
@@ -73,6 +87,14 @@ upgrade-security|verify|versions|which-package) ]];
                ;;
            reload|*start|status|stop)
                _services "$cur"
+               return 0
+               ;;
+           set-auto)
+               COMPREPLY=( $( _comp_dpkg_manual_packages "$cur" ) )
+               return 0
+               ;;
+           set-manual)
+               COMPREPLY=( $( _comp_dpkg_auto_packages "$cur" ) )
                return 0
                ;;
            unhold)
@@ -111,7 +133,7 @@ upgrade-security|verify|versions|which-package) ]];
             policy purge purge-orphans purge-removed rbuilddeps readme
             rec-download recommended reconfigure reinstall reload remove
             remove-orphans repackage reportbug restart rpm2deb rpminstall
-            search searchapt show sizes snapshot source start status
+            search searchapt set-auto set-manual show sizes snapshot source start status
             status-match stop tasksel todo toupgrade tutorial unhold
             unofficial update update-alternatives update-pci-ids update-usb-ids
             upgrade upgrade-security verify versions which-package)

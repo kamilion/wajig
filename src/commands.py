@@ -872,6 +872,20 @@ def searchapt(args):
     perform.execute(command)
 
 
+def setauto(args):
+    """Set packages as automatically installed"""
+    package_names = " ".join(set(args.packages))
+    command = "apt-mark auto {}".format(package_names)
+    perform.execute(command, root=True)
+
+
+def setmanual(args):
+    """Set packages as manually installed"""
+    package_names = " ".join(set(args.packages))
+    command = "apt-mark manual {}".format(package_names)
+    perform.execute(command, root=True)
+
+
 def show(args):
     """Provide a detailed description of package"""
     package_names = " ".join(set(args.packages))

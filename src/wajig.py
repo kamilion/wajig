@@ -833,6 +833,26 @@ def main():
     parser_searchapt.add_argument("dist")
     parser_searchapt.set_defaults(func=function)
 
+    function = commands.setauto
+    parser_setauto = subparsers.add_parser(
+        "setauto",
+        parents=[parser_teach],
+        aliases=["set-auto"],
+        description=function.__doc__,
+    )
+    parser_setauto.add_argument("packages", nargs="+")
+    parser_setauto.set_defaults(func=function)
+
+    function = commands.setmanual
+    parser_setmanual = subparsers.add_parser(
+        "setmanual",
+        parents=[parser_teach],
+        aliases=["set-manual"],
+        description=function.__doc__,
+    )
+    parser_setmanual.add_argument("packages", nargs="+")
+    parser_setmanual.set_defaults(func=function)
+
     function = commands.show
     parser_show = subparsers.add_parser(
         "show",
