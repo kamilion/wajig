@@ -1,0 +1,8 @@
+debian/.debhelper/
+debian/files
+debian/wajig.debhelper.log
+debian/wajig.postinst.debhelper
+debian/wajig.prerm.debhelper
+debian/wajig.substvars
+debian/wajig/
+wajig.sh
