@@ -478,6 +478,12 @@ def listalternatives(args):
     perform.execute(command)
 
 
+def listauto(args):
+    """List automatically installed packages"""
+    command = "apt-mark showauto"
+    perform.execute(command)
+
+
 def listcommands(args):
     """Display all wajig commands"""
     for name, value in sorted(globals().items()):
@@ -529,6 +535,12 @@ def listinstalled(args):
 def listlog(args):
     """Display wajig log file"""
     perform.execute("cat " + util.log_file)
+
+
+def listmanual(args):
+    """List manually installed packages"""
+    command = "apt-mark showmanual"
+    perform.execute(command)
 
 
 def listnames(args):

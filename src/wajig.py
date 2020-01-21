@@ -450,6 +450,15 @@ def main():
     )
     parser_listall.set_defaults(func=function)
 
+    function = commands.listauto
+    parser_listauto = subparsers.add_parser(
+        "listauto",
+        aliases=["list-auto"],
+        parents=[parser_teach],
+        description=function.__doc__,
+    )
+    parser_listauto.set_defaults(func=function)
+
     function = commands.listcache
     parser_listcache = subparsers.add_parser(
         "listcache",
@@ -502,6 +511,15 @@ def main():
         description=function.__doc__,
     )
     parser_listinstalled.set_defaults(func=function)
+
+    function = commands.listmanual
+    parser_listmanual = subparsers.add_parser(
+        "listmanual",
+        aliases=["list-manual"],
+        parents=[parser_teach],
+        description=function.__doc__,
+    )
+    parser_listmanual.set_defaults(func=function)
 
     function = commands.listnames
     parser_listnames = subparsers.add_parser(
